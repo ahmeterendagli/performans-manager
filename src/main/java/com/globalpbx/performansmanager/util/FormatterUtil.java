@@ -1,5 +1,8 @@
 package com.globalpbx.performansmanager.util;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 public class FormatterUtil {
 
     public static String generateHTMLTable(String[] headers, String[][] data, String dangerousValue) {
@@ -49,5 +52,13 @@ public class FormatterUtil {
         } else {
             return String.format("%.2f KB", kiloByteSize);
         }
+    }
+
+    public static String formatWithDecimal(double value) {
+        DecimalFormat df = new DecimalFormat("#.#");
+        df.setRoundingMode(RoundingMode.CEILING);
+
+        String formattedCpuUsage = df.format(value);
+        return formattedCpuUsage;
     }
 }

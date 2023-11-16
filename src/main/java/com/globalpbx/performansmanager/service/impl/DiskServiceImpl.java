@@ -9,6 +9,7 @@ import com.globalpbx.performansmanager.dto.SystemPerformansDto;
 import com.globalpbx.performansmanager.feignclient.MailService;
 import com.globalpbx.performansmanager.repository.DiskRepository;
 import com.globalpbx.performansmanager.service.DiskService;
+import com.globalpbx.performansmanager.util.FormatterUtil;
 import com.sun.management.OperatingSystemMXBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -101,10 +102,10 @@ public class DiskServiceImpl implements DiskService {
         double freeSpacePercentage = 100 * freePartitionSpace / totalCapacity;
 
         return SystemPerformansDto.builder()
-                .diskUsagePercentage(String.valueOf(diskUsagePercentage))
-                .cpuUsagePercentage(String.valueOf(cpuUsagePercentage))
-                .processCpuTime(String.valueOf(processCpuTime))
-                .freeSpacePercentage(String.valueOf(freeSpacePercentage))
+                .diskUsagePercentage(FormatterUtil.formatWithDecimal(diskUsagePercentage))
+                .cpuUsagePercentage(FormatterUtil.formatWithDecimal(cpuUsagePercentage))
+                .processCpuTime(FormatterUtil.formatWithDecimal(processCpuTime))
+                .freeSpacePercentage(FormatterUtil.formatWithDecimal(freeSpacePercentage))
                 .build();
     }
 
